@@ -36,7 +36,7 @@ class BooksApp extends Component {
               <Home books={this.state.books} updateBooks={this.updateBooks}/>
           </Route>
           <Route exact path="/search"> 
-              <Search updateBooks={this.updateBooks} />
+              <Search books={this.state.books} updateBooks={this.updateBooks} />
           </Route>
         </div>
       </BrowserRouter>

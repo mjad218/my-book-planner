@@ -15,7 +15,22 @@ class Search extends Component {
         this.state.query !== '' && 
         BooksAPI.search(this.state.query)
         .then( (books) => {
-            this.setState({books : books}) 
+            books.map( (book) => {
+                this.props.books.forEach( ( myBook) => {
+                    if (book.id === myBook.id) {
+                        if ( book.title === "Pro React") {
+                            //console.log(myBook); 
+                            //console.log(book); 
+                            //console.log(myBook.shelf); 
+                        } 
+                        book.shelf = myBook.shelf; 
+                    } else {
+                        !book.shelf && (book.shelf = "none");
+                    }
+                }) 
+                return book; 
+            }); 
+            this.setState({books}) 
         }    
         ) 
     } 
