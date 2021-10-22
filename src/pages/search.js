@@ -7,10 +7,8 @@ class Search extends Component {
         query : '', 
         books: []
     }
-
     componentDidMount() {
-        console.log(this.state);
-
+        // console.log(this.state);
     }
     handleSearch = (query) => {
         this.setState({query}) 
@@ -21,7 +19,6 @@ class Search extends Component {
         }    
         ) 
     } 
-
     render() {
         return (
             <div className="search-books">
@@ -29,28 +26,19 @@ class Search extends Component {
                     <Link to="/" > 
                         <button className="close-search">Close</button>
                     </Link>
-
                     <div className="search-books-input-wrapper">
-                        {/*
-                        NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                        You can find these search terms here:
-                        https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                
-                        However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                        you don't find a specific author or title. Every search is limited by search terms.
-                        */}
                         <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={ (event) => this.handleSearch(event.target.value) } />
-                
                     </div>
                 </div>
                 <div className="search-books-results">
-                    {/* {JSON.stringify(this.state.query)} */}
-                    {
-                        this.state.books.error === undefined && this.state.query !== ''
-                        &&
-                        <ListBooks updateBooks={this.props.updateBooks} books={this.state.books} />
+                    {   <span style={{textAlign: "center" , display: "block"}}> 
+                            {this.state.books.length > 0 && this.state.query !== '' && `Showing ${this.state.books.length} books for "${this.state.query}"` } 
+                        </span> }
+                    {   this.state.books.error === undefined && this.state.query !== ''
+                        && <ListBooks updateBooks={this.props.updateBooks} books={this.state.books} />
                     }
-                    
+                    {this.state.books.error && <span style={{textAlign: "center", display: "block"}}>No Books to Show</span>}
+                    {this.state.query === '' && <span style={{textAlign: "center" , display: "block"}}>type something to search for</span>}
                 </div>
             </div>
         )
